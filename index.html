@@ -7,29 +7,43 @@
 <meta name="description" content="21 jours pour maîtriser le développement web avec l'IA, une semaine pour installer ton système d'acquisition clients, puis 45 jours de suivi. Atelier pratique iBuilder.">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#1c2cf0">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Sacramento&display=swap" rel="stylesheet">
 <script src="pre.js"></script>
-<link rel="stylesheet" href="styles.css?v=52">
+<link rel="stylesheet" href="styles.css?v=70">
 </head>
 <body>
 <a class="skip" href="#top">Aller au contenu</a>
 
 <!-- ====== HEADER ====== -->
-<header class="hdr">
-  <div class="wrap hdr-in">
+<header class="hdr" id="hdr">
+  <div class="hdr-pill">
     <a href="#top" class="brand" aria-label="iBuilder, accueil"><img src="assets/logo.png" width="700" height="233" alt="iBuilder, plateforme de formation en ligne"></a>
-    <nav class="nav" aria-label="Sections">
+    <nav class="nav" id="nav" aria-label="Sections de la page">
+      <span class="nav-ind" aria-hidden="true"></span>
       <a href="#methode">Méthode</a>
       <a href="#programme">Programme</a>
       <a href="#suivi">Suivi</a>
       <a href="#offre">Prix</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="btn btn-sm btn-blue" data-wa href="#">Réserver</a>
+    <a class="btn btn-sm btn-blue hdr-cta" data-wa href="#">Réserver</a>
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+    <i class="hdr-progress" aria-hidden="true"></i>
   </div>
+  <nav class="mnav" id="mnav" aria-label="Menu" hidden>
+    <a href="#methode"><span>Méthode</span><i aria-hidden="true">→</i></a>
+    <a href="#programme"><span>Programme</span><i aria-hidden="true">→</i></a>
+    <a href="#suivi"><span>Suivi</span><i aria-hidden="true">→</i></a>
+    <a href="#offre"><span>Prix</span><i aria-hidden="true">→</i></a>
+    <a href="#faq"><span>FAQ</span><i aria-hidden="true">→</i></a>
+    <a class="btn btn-lg btn-blue mnav-cta" data-wa href="#">Réserver ma place</a>
+  </nav>
 </header>
 
 <main id="top">
@@ -567,7 +581,7 @@
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="motion-kit.js"></script>
-<script src="main.js?v=50"></script>
+<script src="main.js?v=70"></script>
 <script src="motion.js?v=52"></script>
 </body>
 </html>
