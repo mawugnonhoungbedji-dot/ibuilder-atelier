@@ -136,8 +136,8 @@
       });
       tl.to('.ct-num', { scale: 1.2, duration: 0.35, ease: 'power2.inOut' }, '+=0.08')
         .to('.calc-strike', { scaleX: 1, duration: 0.3, ease: 'power3.out' }, '+=0.05')
-        .to(totalEl, { color: '#ffffff', opacity: 0.7, duration: 0.2 }, '<0.05')
-        .to(rows, { opacity: 0.35, duration: 0.2 }, '<')
+        .to(totalEl, { color: '#ffffff', opacity: 0.88, duration: 0.2 }, '<0.05')
+        .to(rows, { opacity: 0.72, duration: 0.2 }, '<')
         .to('.calc-in', { opacity: 0, y: -50, scale: 0.92, duration: 0.35, ease: 'power2.in' }, '+=0.12')
         .to('.calc-final', { opacity: 1, duration: 0.22 }, '-=0.05')
         .fromTo('.cf-price b', { scale: 0.55 }, { scale: 1, duration: 0.6, ease: 'back.out(1.6)' }, '<')
