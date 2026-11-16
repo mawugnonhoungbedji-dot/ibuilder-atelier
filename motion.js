@@ -24,7 +24,7 @@
   let first = true;
   try { first = sessionStorage.getItem('ib-visited') !== '1'; sessionStorage.setItem('ib-visited', '1'); } catch (e) {}
 
-  const radius = '28px 0 28px 28px';
+  const radius = '28px';
   const heroIn = () => {
     const tl = gsap.timeline();
     tl.from('.hdr', { yPercent: -100, opacity: 0, duration: 0.8, ease: 'expo.out' })
@@ -43,7 +43,7 @@
   };
 
   if (first) {
-    const l = MK.loader.curtain({ brand: 'iBuilder', color: '#0000ff', ink: '#ffffff', bands: 6 });
+    const l = MK.loader.curtain({ brand: 'iBuilder', color: '#1c2cf0', ink: '#ffffff', bands: 6 });
     clearCover();
     l.add(heroIn(), '-=0.35');
   } else {
