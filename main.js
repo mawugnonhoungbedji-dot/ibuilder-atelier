@@ -108,33 +108,15 @@ if ('IntersectionObserver' in window) {
 (() => {
   const hdr = document.getElementById('hdr');
   const nav = document.getElementById('nav');
-  const ind = nav.querySelector('.nav-ind');
   const links = [...nav.querySelectorAll('a')];
   const mlinks = [...document.querySelectorAll('#mnav a:not(.btn)')];
   const btn = document.getElementById('menuBtn');
   const panel = document.getElementById('mnav');
   let activeId = null;
 
-  // compactage + progression de lecture
-  const onScroll = () => {
-    hdr.classList.toggle('scrolled', scrollY > 40);
-    const max = document.documentElement.scrollHeight - innerHeight;
-    hdr.querySelector('.hdr-pill').style.setProperty('--p', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0);
-  };
+  // compactage au défilement
+  const onScroll = () => hdr.classList.toggle('scrolled', scrollY > 40);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
-
-  // indicateur qui glisse sous le lien survolé / actif
-  const moveTo = (a) => {
-    if (!a) { ind.classList.remove('on'); return; }
-    ind.style.left = a.offsetLeft + 'px'; ind.style.width = a.offsetWidth + 'px'; ind.classList.add('on');
-  };
-  const activeLink = () => links.find(a => a.getAttribute('href') === '#' + activeId);
-  links.forEach(a => {
-    a.addEventListener('pointerenter', () => moveTo(a));
-    a.addEventListener('focus', () => moveTo(a));
-  });
-  nav.addEventListener('pointerleave', () => moveTo(activeLink()));
-  nav.addEventListener('focusout', (e) => { if (!nav.contains(e.relatedTarget)) moveTo(activeLink()); });
 
   // repérage de la section visible
   const ids = links.map(a => a.getAttribute('href').slice(1));
@@ -142,7 +124,6 @@ if ('IntersectionObserver' in window) {
   const setActive = (id) => {
     activeId = id;
     [...links, ...mlinks].forEach(a => { if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
-    moveTo(activeLink());
   };
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((es) => {
@@ -151,7 +132,6 @@ if ('IntersectionObserver' in window) {
     }, { rootMargin: '-40% 0px -55% 0px' });
     sections.forEach(s => io.observe(s));
   }
-  addEventListener('resize', () => moveTo(activeLink()));
 
   // menu mobile
   const setOpen = (open) => {
