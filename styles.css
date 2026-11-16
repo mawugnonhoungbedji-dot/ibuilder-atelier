@@ -693,3 +693,16 @@ h1,h2,h3{font-weight:600;letter-spacing:-.035em;line-height:1.08;color:var(--nav
 /* le hero commence sous l'îlot */
 .hero{padding-top:78px}
 @media(prefers-reduced-motion:reduce){.hdr-pill,.nav-ind,.mnav,.brand img{transition:none}}
+
+/* ===== Hero mobile : l'USP, puis la personne, puis le sous-texte et les boutons ===== */
+@media(max-width:899px){
+  .hero-grid{display:flex;flex-direction:column;gap:0;padding-top:30px}
+  .hero-copy{display:contents}
+  .hero-grid .eyebrow{order:1;margin-bottom:14px}
+  .hero-grid h1{order:2}
+  .hero-grid .hero-visual{order:3;width:min(330px,80vw);margin:22px auto 8px;padding:14px 0 18px}
+  .hero-grid .lead{order:4;margin-top:20px}
+  .hero-grid .cta-row{order:5;margin-top:22px}
+  .hero-grid .micro{order:6}
+  .hero-visual .trainer-card{aspect-ratio:1/1.08}
+}
