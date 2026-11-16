@@ -7,13 +7,15 @@
 <meta name="description" content="21 jours pour maîtriser le développement web avec l'IA, une semaine pour installer ton système d'acquisition clients, puis 45 jours de suivi. Atelier pratique iBuilder.">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#1c2cf0">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Sacramento&display=swap" rel="stylesheet">
 <script src="pre.js"></script>
-<link rel="stylesheet" href="styles.css?v=31">
+<link rel="stylesheet" href="styles.css?v=51">
 </head>
 <body>
+<a class="skip" href="#top">Aller au contenu</a>
 
 <!-- ====== HEADER ====== -->
 <header class="hdr">
@@ -92,17 +94,17 @@
     </div>
 
     <div class="showcase" id="showcase" aria-roledescription="carrousel" aria-label="Projets réalisés">
-      <div class="sc-tabs" role="tablist" aria-label="Choisir un projet">
-        <button role="tab" aria-selected="true" class="sc-tab is-on"><i></i><span>XpertEO</span></button>
-        <button role="tab" aria-selected="false" class="sc-tab"><i></i><span>Lumina</span></button>
-        <button role="tab" aria-selected="false" class="sc-tab"><i></i><span>Maison Sable</span></button>
-        <button role="tab" aria-selected="false" class="sc-tab"><i></i><span>Flyzii</span></button>
-        <button role="tab" aria-selected="false" class="sc-tab"><i></i><span>StayGo</span></button>
-        <button role="tab" aria-selected="false" class="sc-tab"><i></i><span>VivaChat</span></button>
+      <div class="sc-tabs" role="group" aria-label="Choisir un projet">
+        <button type="button" aria-current="true" class="sc-tab is-on"><i></i><span>XpertEO</span></button>
+        <button type="button" aria-current="false" class="sc-tab"><i></i><span>Lumina</span></button>
+        <button type="button" aria-current="false" class="sc-tab"><i></i><span>Maison Sable</span></button>
+        <button type="button" aria-current="false" class="sc-tab"><i></i><span>Flyzii</span></button>
+        <button type="button" aria-current="false" class="sc-tab"><i></i><span>StayGo</span></button>
+        <button type="button" aria-current="false" class="sc-tab"><i></i><span>VivaChat</span></button>
       </div>
       <div class="sc-view">
         <div class="sc-track">
-        <article class="slide" aria-roledescription="diapositive" aria-label="1 sur 6 : XpertEO">
+        <article class="slide" role="group" aria-roledescription="diapositive" aria-label="1 sur 6 : XpertEO">
           <div class="slide-info">
             <p class="slide-n">01<span>/06</span></p>
             <span class="chip">Mon site en ligne</span>
@@ -110,13 +112,13 @@
             <p class="slide-kind">SEO · Visibilité IA · Acquisition</p>
             <p class="slide-tag">« Votre prochain client vous cherche déjà. »</p>
             <ul><li><b>Promesse :</b> le besoin du client dès la première ligne</li><li><b>Preuves :</b> des réalisations montrées avant de demander quoi que ce soit</li><li><b>Action :</b> un diagnostic proposé à chaque étape</li></ul>
-            <a class="slide-link" href="https://e-xperteo.com" target="_blank" rel="noopener noreferrer">Voir le site en ligne ↗</a>
+            <a class="slide-link" href="https://e-xperteo.com" target="_blank" rel="noopener noreferrer">Voir le site en ligne <span aria-hidden="true">↗</span><span class="sr-only">(s'ouvre dans un nouvel onglet)</span></a>
           </div>
           <div class="slide-media">
             <div class="frame"><video muted loop playsinline preload="none" poster="assets/sites/xperteo.jpg" data-src="assets/sites/xperteo.mp4" aria-label="Aperçu animé du site XpertEO, sans son"></video></div>
           </div>
         </article>
-        <article class="slide" aria-roledescription="diapositive" aria-label="2 sur 6 : Lumina">
+        <article class="slide" role="group" aria-roledescription="diapositive" aria-label="2 sur 6 : Lumina">
           <div class="slide-info">
             <p class="slide-n">02<span>/06</span></p>
             <span class="chip">Mon site en ligne</span>
@@ -124,13 +126,13 @@
             <p class="slide-kind">Agence web · Cotonou</p>
             <p class="slide-tag">« Votre site doit vous faire gagner des clients. »</p>
             <ul><li><b>Lisibilité :</b> noir et blanc sobre, un message par écran</li><li><b>Preuves :</b> projets en grille, puis avis de clients</li><li><b>Action :</b> « Démarrer un projet » toujours à portée</li></ul>
-            <a class="slide-link" href="https://lumina-agency.netlify.app/" target="_blank" rel="noopener noreferrer">Voir le site en ligne ↗</a>
+            <a class="slide-link" href="https://lumina-agency.netlify.app/" target="_blank" rel="noopener noreferrer">Voir le site en ligne <span aria-hidden="true">↗</span><span class="sr-only">(s'ouvre dans un nouvel onglet)</span></a>
           </div>
           <div class="slide-media">
             <div class="frame"><video muted loop playsinline preload="none" poster="assets/sites/lumina.jpg" data-src="assets/sites/lumina.mp4" aria-label="Aperçu animé du site Lumina, sans son"></video></div>
           </div>
         </article>
-        <article class="slide" aria-roledescription="diapositive" aria-label="3 sur 6 : Maison Sable">
+        <article class="slide" role="group" aria-roledescription="diapositive" aria-label="3 sur 6 : Maison Sable">
           <div class="slide-info">
             <p class="slide-n">03<span>/06</span></p>
             <span class="chip">Projet personnel</span>
@@ -144,7 +146,7 @@
             <div class="frame"><video muted loop playsinline preload="none" poster="assets/sites/maisonsable.jpg" data-src="assets/sites/maisonsable.mp4" aria-label="Aperçu animé du site Maison Sable, sans son"></video></div>
           </div>
         </article>
-        <article class="slide" aria-roledescription="diapositive" aria-label="4 sur 6 : Flyzii">
+        <article class="slide" role="group" aria-roledescription="diapositive" aria-label="4 sur 6 : Flyzii">
           <div class="slide-info">
             <p class="slide-n">04<span>/06</span></p>
             <span class="chip">Projet personnel</span>
@@ -158,7 +160,7 @@
             <div class="frame"><video muted loop playsinline preload="none" poster="assets/sites/flyzii.jpg" data-src="assets/sites/flyzii.mp4" aria-label="Aperçu animé du site Flyzii, sans son"></video></div>
           </div>
         </article>
-        <article class="slide" aria-roledescription="diapositive" aria-label="5 sur 6 : StayGo">
+        <article class="slide" role="group" aria-roledescription="diapositive" aria-label="5 sur 6 : StayGo">
           <div class="slide-info">
             <p class="slide-n">05<span>/06</span></p>
             <span class="chip">Projet personnel</span>
@@ -172,7 +174,7 @@
             <div class="frame"><video muted loop playsinline preload="none" poster="assets/sites/staygo.jpg" data-src="assets/sites/staygo.mp4" aria-label="Aperçu animé du site StayGo, sans son"></video></div>
           </div>
         </article>
-        <article class="slide" aria-roledescription="diapositive" aria-label="6 sur 6 : VivaChat">
+        <article class="slide" role="group" aria-roledescription="diapositive" aria-label="6 sur 6 : VivaChat">
           <div class="slide-info">
             <p class="slide-n">06<span>/06</span></p>
             <span class="chip">Projet personnel</span>
@@ -189,6 +191,7 @@
         </div>
       </div>
       <div class="sc-nav">
+        <button type="button" class="sc-pause" aria-pressed="false" aria-label="Mettre le défilement en pause"><span aria-hidden="true">❚❚</span></button>
         <button type="button" class="sc-arrow" data-dir="-1" aria-label="Projet précédent">←</button>
         <button type="button" class="sc-arrow" data-dir="1" aria-label="Projet suivant">→</button>
       </div>
@@ -564,7 +567,7 @@
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="motion-kit.js"></script>
-<script src="main.js?v=8"></script>
-<script src="motion.js?v=30"></script>
+<script src="main.js?v=50"></script>
+<script src="motion.js?v=50"></script>
 </body>
 </html>

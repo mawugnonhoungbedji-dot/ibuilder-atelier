@@ -88,8 +88,6 @@
   gsap.from('.price-card', { y: 70, opacity: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: '.offer', start: 'top 80%' } });
   $$('.fit > div, .proof, .why, .trainer-card.tall').forEach((e) => gsap.from(e, { y: 60, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: e, start: 'top 90%' } }));
   gsap.from('.faq details', { y: 24, opacity: 0, stagger: 0.07, duration: 0.7, ease: 'expo.out', scrollTrigger: { trigger: '.faq', start: 'top 88%' } });
-  // F4. Les 3 semaines se recouvrent (grand écran seulement)
-  if (desktop && innerHeight >= 700) MK.stickyCards('.weeks .week', { scale: 0.93 });
 
   // ---------- E. Le calcul : surcouche automatique (aucun contrôle), puis le prix s'affiche ----------
   const fmt = (n) => Math.round(n).toLocaleString('fr-FR').replace(/\s/g, '\u00a0');
@@ -102,15 +100,19 @@
       (MK.lenis && MK.lenis.scrollTo) ? MK.lenis.scrollTo(y, { immediate: true, force: true }) : window.scrollTo(0, y);
     };
     let running = false;
+    const page = [$('main'), $('.hdr'), $('.ftr'), $('.skip')].filter(Boolean);
+    const setInert = (v) => page.forEach((e) => { e.inert = v; });
+    let tlRef = null;
     const play = () => {
       if (running) return;
       running = true;
       MK.lock();
+      setInert(true);
       calc.classList.add('on');
       goOffre(); // la section prix est déjà en place derrière la surcouche
       const o = { v: 0 }, p = { v: 285000 };
-      gsap.set(rows, { opacity: 0, x: -70, scale: 0.96 });
-      gsap.set('.calc-chip, .calc h2', { opacity: 0, y: 26 });
+      gsap.set(rows, { opacity: 0, x: -60, scale: 0.97 });
+      gsap.set('.calc-chip, .calc h2', { opacity: 0, y: 22 });
       gsap.set('.calc-total', { opacity: 0 });
       gsap.set('.calc-in', { opacity: 1, y: 0, scale: 1 });
       gsap.set('.calc-final', { opacity: 0 });
@@ -118,31 +120,35 @@
       gsap.set('.calc-bar i', { scaleX: 0 });
       gsap.set(calc, { clipPath: 'inset(0% 0% 0% 0%)', opacity: 0 });
       totalEl.textContent = '0';
-      const tl = gsap.timeline({ onComplete: () => { calc.classList.remove('on'); gsap.set(calc, { clearProps: 'all' }); running = false; MK.unlock(); goOffre(); ScrollTrigger.refresh(); } });
-      gsap.to('.calc-bar i', { scaleX: 1, duration: 7.4, ease: 'none', delay: 0.2 });
-      tl.to(calc, { opacity: 1, duration: 0.35, ease: 'power1.out' })
-        .to('.calc-chip, .calc h2', { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'expo.out' }, 0.25)
-        .to('.calc-total', { opacity: 1, duration: 0.3 }, '<0.2');
+      const done = () => { calc.classList.remove('on'); gsap.set(calc, { clearProps: 'all' }); running = false; setInert(false); MK.unlock(); goOffre(); ScrollTrigger.refresh(); };
+      const tl = gsap.timeline({ onComplete: done });
+      tlRef = tl;
+      gsap.to('.calc-bar i', { scaleX: 1, duration: 4.3, ease: 'none', delay: 0.15 });
+      tl.to(calc, { opacity: 1, duration: 0.25, ease: 'power1.out' })
+        .to('.calc-chip, .calc h2', { opacity: 1, y: 0, duration: 0.35, stagger: 0.08, ease: 'expo.out' }, 0.15)
+        .to('.calc-total', { opacity: 1, duration: 0.2 }, '<0.15');
       let cum = 0;
       rows.forEach((r, i) => {
         cum += vals[i]; const target = cum;
-        tl.to(r, { opacity: 1, x: 0, scale: 1, duration: 0.5, ease: 'back.out(1.4)' }, '+=0.12')
-          .to(o, { v: target, duration: 0.5, ease: 'power1.out', onUpdate: () => (totalEl.textContent = fmt(o.v)) }, '<')
-          .fromTo(totalEl, { scale: 1.14 }, { scale: 1, duration: 0.35, ease: 'power2.out' }, '<0.15');
+        tl.to(r, { opacity: 1, x: 0, scale: 1, duration: 0.32, ease: 'back.out(1.3)' }, '+=0.04')
+          .to(o, { v: target, duration: 0.32, ease: 'power1.out', onUpdate: () => (totalEl.textContent = fmt(o.v)) }, '<')
+          .fromTo(totalEl, { scale: 1.12 }, { scale: 1, duration: 0.22, ease: 'power2.out' }, '<0.1');
       });
-      tl.to('.ct-num', { scale: 1.22, duration: 0.5, ease: 'power2.inOut' }, '+=0.15')           // le grand total
-        .to('.calc-strike', { scaleX: 1, duration: 0.45, ease: 'power3.out' }, '+=0.1')         // on barre uniquement le chiffre, en vert
-        .to(totalEl, { color: '#ffffff', opacity: 0.7, duration: 0.35 }, '<0.1')
-        .to(rows, { opacity: 0.35, duration: 0.35 }, '<')
-        .to('.calc-in', { opacity: 0, y: -60, scale: 0.9, duration: 0.5, ease: 'power2.in' }, '+=0.25')
-        .to('.calc-final', { opacity: 1, duration: 0.3 }, '-=0.1')
-        .fromTo('.cf-price b', { scale: 0.5 }, { scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, '<')
-        .to(p, { v: 15000, duration: 0.8, ease: 'power3.out', onUpdate: () => (priceEl.textContent = fmt(p.v)), onComplete: () => (priceEl.innerHTML = '15&nbsp;000') }, '<')
-        .fromTo('.ring', { scale: 0.2, opacity: 0.9 }, { scale: 3.4, opacity: 0, duration: 1.1, stagger: 0.2, ease: 'power2.out' }, '<0.1')
-        .from('.cf-top, .cf-sub', { opacity: 0, y: 22, stagger: 0.12, duration: 0.5 }, '-=0.6')
-        .to({}, { duration: 0.8 })
-        .to(calc, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.8, ease: 'expo.inOut' });  // le rideau se lève : le prix est là
+      tl.to('.ct-num', { scale: 1.2, duration: 0.35, ease: 'power2.inOut' }, '+=0.08')
+        .to('.calc-strike', { scaleX: 1, duration: 0.3, ease: 'power3.out' }, '+=0.05')
+        .to(totalEl, { color: '#ffffff', opacity: 0.7, duration: 0.2 }, '<0.05')
+        .to(rows, { opacity: 0.35, duration: 0.2 }, '<')
+        .to('.calc-in', { opacity: 0, y: -50, scale: 0.92, duration: 0.35, ease: 'power2.in' }, '+=0.12')
+        .to('.calc-final', { opacity: 1, duration: 0.22 }, '-=0.05')
+        .fromTo('.cf-price b', { scale: 0.55 }, { scale: 1, duration: 0.6, ease: 'back.out(1.6)' }, '<')
+        .to(p, { v: 15000, duration: 0.6, ease: 'power3.out', onUpdate: () => (priceEl.textContent = fmt(p.v)), onComplete: () => (priceEl.innerHTML = '15&nbsp;000') }, '<')
+        .fromTo('.ring', { scale: 0.2, opacity: 0.9 }, { scale: 3.2, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out' }, '<0.05')
+        .from('.cf-top, .cf-sub', { opacity: 0, y: 18, stagger: 0.08, duration: 0.35 }, '-=0.45')
+        .to({}, { duration: 0.15 })
+        .to(calc, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.4, ease: 'expo.inOut' });
     };
+    // Échap : passer la séquence (utile au clavier)
+    addEventListener('keydown', (e) => { if (e.key === 'Escape' && running && tlRef) tlRef.progress(1); });
     // Le calcul ne se joue qu'après une vraie action du visiteur (molette, doigt, clavier, clic), jamais au chargement
     let armed = false;
     const arm = () => { armed = true; };
@@ -165,6 +171,9 @@
     gsap.fromTo(s, { clipPath: `inset(${inset})` }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none', scrollTrigger: { trigger: s, start: 'top 96%', end: 'top 18%', scrub: 0.6 } });
   };
   ['#programme', '#suivi', '.final'].forEach((s) => openIn(s));
+
+  // F4. Les 3 semaines se recouvrent (grand écran seulement)
+  if (desktop && innerHeight >= 700) MK.stickyCards('.weeks .week', { scale: 0.93 });
 
   // ---------- G. Prix : compteur ----------
   const pb = $('.price b');
